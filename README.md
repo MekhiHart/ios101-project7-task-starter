@@ -1,10 +1,11 @@
-# Project 7 - *Name of App Here*
+# Project 7 - *Todo CRUD app*
 
-Submitted by: **Your Name Here**
+Submitted by: **Mekhi Hart Dela Cruz**
 
 **Name of your app** is an app that ... [TODO] 
+- Tracks and manages tasks
 
-Time spent: **X** hours spent in total
+Time spent: **4.5** hours spent in total
 
 ## Required Features
 
