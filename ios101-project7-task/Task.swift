@@ -5,7 +5,7 @@
 import UIKit
 
 // The Task model
-struct Task {
+struct Task: Codable {
 
     // The task's title
     var title: String
@@ -58,19 +58,44 @@ extension Task {
     static func save(_ tasks: [Task]) {
 
         // TODO: Save the array of tasks
+        // encode data
+        // save data to UserDefault
+        
+        let defaults = UserDefaults.standard
+        let encodedData = try! JSONEncoder().encode(tasks)
+        defaults.set(encodedData, forKey: EnumKey.SavedTasks.rawValue)
+        
+        
     }
 
     // Retrieve an array of saved tasks from UserDefaults.
     static func getTasks() -> [Task] {
         
         // TODO: Get the array of saved tasks from UserDefaults
+        // get encoded data from Defaults
+        // check if key is valid
+        // if valid, decode data
+        // return decoded data
+        let defaults = UserDefaults.standard
+        if let encodedData = defaults.data(forKey: EnumKey.SavedTasks.rawValue){
+            let decodedData = try! JSONDecoder().decode([Task].self, from: encodedData)
+            return decodedData
+            
+        }
 
         return [] // 👈 replace with returned saved tasks
     }
 
     // Add a new task or update an existing task with the current task.
     func save() {
-
+        
         // TODO: Save the current task
+        // retreive saved tasks
+        // append the current task
+        // save it
+        
+        var retrievedTasks = Task.getTasks()
+        retrievedTasks.append(self)
+        Task.save(retrievedTasks)
     }
 }
