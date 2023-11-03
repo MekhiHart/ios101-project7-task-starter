@@ -15,6 +15,9 @@ struct Task: Codable {
 
     // The due date by which the task should be completed
     var dueDate: Date
+//    var id: String
+    
+    let id: String
 
     // Initialize a new task
     // `note` and `dueDate` properties have default values provided if none are passed into the init by the caller.
@@ -22,6 +25,7 @@ struct Task: Codable {
         self.title = title
         self.note = note
         self.dueDate = dueDate
+        self.id = UUID().uuidString
     }
 
     // A boolean to determine if the task has been completed. Defaults to `false`
@@ -47,7 +51,7 @@ struct Task: Codable {
     let createdDate: Date = Date()
 
     // An id (Universal Unique Identifier) used to identify a task.
-    let id: String = UUID().uuidString
+//    let id: String = UUID().uuidString
 }
 
 // MARK: - Task + UserDefaults
@@ -64,6 +68,7 @@ extension Task {
         let defaults = UserDefaults.standard
         let encodedData = try! JSONEncoder().encode(tasks)
         defaults.set(encodedData, forKey: EnumKey.SavedTasks.rawValue)
+        print("saved array tasks to defaults")
         
         
     }
@@ -94,8 +99,18 @@ extension Task {
         // append the current task
         // save it
         
+        
         var retrievedTasks = Task.getTasks()
+        
+        for idx in 0...retrievedTasks.count - 1{
+            let task = retrievedTasks[idx]
+            if task.id == self.id{
+                retrievedTasks.remove(at: idx)
+                break
+            }
+        }
         retrievedTasks.append(self)
         Task.save(retrievedTasks)
+        print("saved self")
     }
 }

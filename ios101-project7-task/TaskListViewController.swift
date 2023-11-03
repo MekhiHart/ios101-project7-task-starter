@@ -93,6 +93,9 @@ class TaskListViewController: UIViewController {
     private func refreshTasks() {
         // 1.
         var tasks = Task.getTasks()
+        for task in tasks{
+            print("task id: \(task.id)")
+        }
         // 2.
         tasks.sort { lhs, rhs in
             if lhs.isComplete && rhs.isComplete {
