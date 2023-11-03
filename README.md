@@ -33,7 +33,7 @@ https://youtu.be/UXFoqsQu6Bs
 
 ## Notes
 
-I would recommend changing the ID property of the task to be instantiated inside the constructor. The current implementation of the Task class instantiates its id outside the constructor and creates a new task id everytime a Task with type Data is downcasted to the Task class. This just made it hard to debug when and caused bugs such as Task when a task is edited and press the done button since it couldn't find the duplicate task when the ID is new everytime.
+I would recommend changing the ID property of the task to be instantiated inside the constructor. The current implementation of the Task class instantiates its id outside the constructor and creates a new task id everytime a Task with type Data is downcasted to the Task class. This just made it hard to debug and caused bugs such as task duplication when a particular task is edited or when press the done button since it couldn't find the duplicate task when the ID is new everytime.
 
 ## License
 
