@@ -81,7 +81,7 @@ class TaskListViewController: UIViewController {
     // MARK: - Helper Functions
     
     // Refresh all tasks
-    // 1. Get the current saved tasks
+    // 1. Get the current saved tasks#imageLiteral(resourceName: "simulator_screenshot_F27703CB-08B2-4872-83DB-717CEA8BC274.png")
     // 2. Sort the tasks list for the following conditions:
     //    i. For completed tasks, sort ascending based on the completed date.
     //    ii. For incomplete tasks, sort ascending based on the date they were created.
@@ -93,9 +93,10 @@ class TaskListViewController: UIViewController {
     private func refreshTasks() {
         // 1.
         var tasks = Task.getTasks()
-        for task in tasks{
-            print("task id: \(task.id)")
-        }
+//        for task in tasks{
+//            print("task id: \(task.id)")
+//        }
+
         // 2.
         tasks.sort { lhs, rhs in
             if lhs.isComplete && rhs.isComplete {
@@ -165,6 +166,13 @@ extension TaskListViewController: UITableViewDataSource {
             Task.save(tasks)
             // 4.
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            let retreivedTasks = Task.getTasks()
+            print("delete:")
+            for task in retreivedTasks{
+                print("id: \(task.id)")
+            }
+            print("with count: \(retreivedTasks.count)\n")
         }
     }
 }

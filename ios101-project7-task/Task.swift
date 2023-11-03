@@ -68,8 +68,10 @@ extension Task {
         let defaults = UserDefaults.standard
         let encodedData = try! JSONEncoder().encode(tasks)
         defaults.set(encodedData, forKey: EnumKey.SavedTasks.rawValue)
-        print("saved array tasks to defaults")
-        
+        print("saved array tasks to defaults: \(tasks.count) \n")
+        for task in tasks{
+            print("id: \(task.id)")
+        }
         
     }
 
@@ -102,13 +104,15 @@ extension Task {
         
         var retrievedTasks = Task.getTasks()
         
-        for idx in 0...retrievedTasks.count - 1{
+        // only does updating if more it's not an empty arr
+        for idx in 0..<retrievedTasks.count{
             let task = retrievedTasks[idx]
             if task.id == self.id{
                 retrievedTasks.remove(at: idx)
                 break
             }
         }
+
         retrievedTasks.append(self)
         Task.save(retrievedTasks)
         print("saved self")
